@@ -169,14 +169,18 @@ function App() {
 
   const detect = async () => {
     const img = await webcam.capture();
-    let tensor = img.resizeBilinear([1,640,640,3]).toInt(); // change the image size
+    let tensor = img.reshape([1,640,640,3]).toInt(); // change the image size
 
 
     let offset = tf.scalar(127.5);
     var  new_frame = img.expandDims().reshape([1,640,640,3]);    
     var test_frame = tf.expandDims(img.toInt()).reshape([-1,640,640,3]);
 
-    const predictions = await model.executeAsync(tensor); 
+    const predictions = await model.executeAsync(tensor.resizeBilinear(
+      crop,
+      [224, 224],
+      alignCorners
+    )); 
     renderPredictions(predictions)
   };
 
