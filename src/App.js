@@ -2,38 +2,9 @@
 import React, { useState, useRef, useEffect, useReducer } from "react";
 import * as tf from '@tensorflow/tfjs';
 import {loadGraphModel} from '@tensorflow/tfjs-converter';
-import styled from 'styled-components';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import "./App.css";
-
-// Create a reference to the hidden file input element
-const hiddenFileInput = React.useRef(null);
-  
-// Programatically click the hidden file input element
-// when the Button component is clicked
-const handleClick = event => {
-  hiddenFileInput.current.click();
-};
-// Call a function (passed as a prop from the parent component)
-// to handle the user-selected file 
-const handleChange = event => {
-  const fileUploaded = event.target.files[0];
-  props.handleFile(fileUploaded);
-};
-return (
-  <>
-    <Button onClick={handleClick}>
-      Upload a file
-    </Button>
-    <input
-      type="file"
-      ref={hiddenFileInput}
-      onChange={handleChange}
-      style={{display: 'none'}} {/* Make the file input element invisible */}
-    />
-  </>
-);
 
 const machine = {
   initial: "initial",
