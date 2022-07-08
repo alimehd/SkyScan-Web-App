@@ -37,29 +37,6 @@ function FileUploadPage(){
 	};
 	};
 
-	return(
-   <div>
-			<input type="file" name="file" onChange={changeHandler} />
-			{isSelected ? (
-				<div>
-					<p>Filename: {selectedFile.name}</p>
-					<p>Filetype: {selectedFile.type}</p>
-					<p>Size in bytes: {selectedFile.size}</p>
-					<p>
-						lastModifiedDate:{' '}
-						{selectedFile.lastModifiedDate.toLocaleDateString()}
-					</p>
-				</div>
-			) : (
-				<p>Select a file to show details</p>
-			)}
-			<div>
-				<button onClick={handleSubmission}>Submit</button>
-			</div>
-		</div>
-	);
-
-
 const machine = {
   initial: "initial",
   states: {
@@ -297,6 +274,25 @@ function App() {
 
         <h3>Browser based apps are a great way to find out how well your model works in the real world!</h3>
       </div>
+      <div>
+			<input type="file" name="file" onChange={changeHandler} />
+			{isSelected ? (
+				<div>
+					<p>Filename: {selectedFile.name}</p>
+					<p>Filetype: {selectedFile.type}</p>
+					<p>Size in bytes: {selectedFile.size}</p>
+					<p>
+						lastModifiedDate:{' '}
+						{selectedFile.lastModifiedDate.toLocaleDateString()}
+					</p>
+				</div>
+			) : (
+				<p>Select a file to show details</p>
+			)}
+			<div>
+				<button onClick={handleSubmission}>Submit</button>
+			</div>
+		</div>
       </div>
       </div>
     
