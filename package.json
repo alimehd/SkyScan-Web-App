@@ -2,7 +2,7 @@
   "name": "object-detector",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://luke-iqt.github.io/SkyScan-Web-App",
+  "homepage": "https://pytri-002.herokuapp.com/",
   "dependencies": {
     "@tensorflow/tfjs": "^3.1.0",
     "@testing-library/jest-dom": "^5.11.4",
