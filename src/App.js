@@ -176,7 +176,7 @@ function App() {
     var  new_frame = img.expandDims().reshape([1,640,640,3]);    
     var test_frame = tf.expandDims(img.toInt()).reshape([-1,640,640,3]);
 
-    const predictions = await model.executeAsync(tensor.reshape([1,640,640,3])); 
+    const predictions = await model.executeAsync(tensor); 
     renderPredictions(predictions)
   };
 
