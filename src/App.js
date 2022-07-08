@@ -5,6 +5,10 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import "./App.css";
+import tw, { styled } from 'twin.macro';
+
+const as = 'dialog'
+const Component = styled(as)(() => [tw`text-base`])
 
 
 
