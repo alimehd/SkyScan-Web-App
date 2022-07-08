@@ -1,12 +1,9 @@
-/* eslint-disable */
 import React, { useState, useRef, useEffect, useReducer } from "react";
 import * as tf from '@tensorflow/tfjs';
 import {loadGraphModel} from '@tensorflow/tfjs-converter';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import "./App.css";
-
-
 
 const machine = {
   initial: "initial",
@@ -196,7 +193,6 @@ function App() {
     complete: { action: reset, text: "Reset" }
   };
 
-
  
   useEffect(() => {
     const timeout = setInterval(() => {
@@ -212,16 +208,6 @@ function App() {
   useEffect(() => {
     loadModel();
   }, [modelURL]); // Only re-run the effect if count changes
-
-  const fileRef = useRef();
-
-  const handleChange = (e) => {
-    const [file] = e.target.files;
-    console.log(file);
-  },
-
-
-  
   
   return (
     <div>
@@ -256,18 +242,6 @@ function App() {
 
         <h3>Browser based apps are a great way to find out how well your model works in the real world!</h3>
       </div>
-      <div>
-      <button onClick={() => fileRef.current.click()}>
-        Custom File Input Button
-      </button>
-      <input
-        ref={fileRef}
-        onChange={handleChange}
-        multiple={false}
-        type="file"
-        hidden
-      />
-    </div>
       </div>
       </div>
     
