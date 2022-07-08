@@ -65,7 +65,7 @@ function App() {
   
     const devices = await navigator.mediaDevices.enumerateDevices();
     console.log(devices);
-    const webcamConfig = { resizeWidth: 300, resizeHeight: 300, centerCrop: true, facingMode: 'environment'}
+    const webcamConfig = { resizeWidth: 640, resizeHeight: 640, centerCrop: true, facingMode: 'environment'}
     const webcam = await tf.data.webcam(videoRef.current,webcamConfig);
     setWebcam(webcam);
     if (!modelReady) {
@@ -80,10 +80,10 @@ function App() {
     scores[0].forEach((score, i) => {
       if (score > threshold) {
         const bbox = [];
-        const minY = boxes[0][i][0] * 300;//video_frame.offsetHeight;
-        const minX = boxes[0][i][1] * 300;//video_frame.offsetWidth;
-        const maxY = boxes[0][i][2] * 300;//video_frame.offsetHeight;
-        const maxX = boxes[0][i][3] * 300;//video_frame.offsetWidth;
+        const minY = boxes[0][i][0] * 640;//video_frame.offsetHeight;
+        const minX = boxes[0][i][1] * 640;//video_frame.offsetWidth;
+        const maxY = boxes[0][i][2] * 640;//video_frame.offsetHeight;
+        const maxX = boxes[0][i][3] * 640;//video_frame.offsetWidth;
         bbox[0] = minX;
         bbox[1] = minY;
         bbox[2] = maxX - minX;
@@ -169,12 +169,12 @@ function App() {
 
   const detect = async () => {
     const img = await webcam.capture();
-    let tensor = img.reshape([1,300, 300,3]).toInt(); // change the image size
+    let tensor = img.reshape([1,640,640,3]).toInt(); // change the image size
 
 
     let offset = tf.scalar(127.5);
-    var  new_frame = img.expandDims(0);    
-    var test_frame = tf.expandDims(0);
+    var  new_frame = img.expandDims().reshape([1,640,640,3]);    
+    var test_frame = tf.expandDims(img.toInt()).reshape([-1,640,640,3]);
 
     const predictions = await model.executeAsync(tensor); 
     renderPredictions(predictions)
@@ -221,7 +221,7 @@ function App() {
       )}
       {showWebcam && (
        <div id="video-box"  >  
-      <video autoPlay playsInline muted id="webcam" width="300px" height="300px" style={{objectFit:"cover"}} ref={videoRef} />
+      <video autoPlay playsInline muted id="webcam" width="640px" height="640px" style={{objectFit:"cover"}} ref={videoRef} />
       <canvas
           className="size"
           ref={canvasRef}
