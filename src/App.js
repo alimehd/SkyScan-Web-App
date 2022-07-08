@@ -189,7 +189,6 @@ function App() {
     next();
   };
 
-
   const actionButton = {
     initial: { action: startWebcam, text: "Start" },
     startWebcam: { text: "Starting Webcam..." },
