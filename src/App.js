@@ -172,7 +172,7 @@ function App() {
     let tensor = img.reshape([1,640,640,3]).toInt(); // change the image size
 
 
-    let offset = tf.scalar(127.5);
+
     var  new_frame = img.expandDims().reshape([1,640,640,3]);    
     var test_frame = tf.expandDims(img.toInt()).reshape([-1,640,640,3]);
 
