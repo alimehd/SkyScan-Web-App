@@ -178,7 +178,7 @@ function App() {
 
     const predictions = await model.executeAsync(tensor.resizeBilinear(
       crop,
-      [224, 224],
+      [640, 640],
       alignCorners
     )); 
     renderPredictions(predictions)
