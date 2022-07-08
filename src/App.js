@@ -173,8 +173,8 @@ function App() {
 
 
     let offset = tf.scalar(127.5);
-    var  new_frame = img.expandDims().reshape([1, 300, 300, 3]);    
-    var test_frame = tf.expandDims(img.toInt()).reshape([-1, 300, 300, 3]);
+    var  new_frame = img.expandDims(0);    
+    var test_frame = tf.expandDims(0);
 
     const predictions = await model.executeAsync(tensor); 
     renderPredictions(predictions)
