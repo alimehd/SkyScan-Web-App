@@ -5,10 +5,6 @@ import {loadGraphModel} from '@tensorflow/tfjs-converter';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import "./App.css";
-import tw, { styled } from 'twin.macro';
-
-const as = 'dialog'
-const Component = styled(as)(() => [tw`text-base`])
 
 
 
@@ -200,32 +196,7 @@ function App() {
     complete: { action: reset, text: "Reset" }
   };
 
-  const Button = styled.button`
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-`;
 
-  const FileUploader = props => {
-    // Create a reference to the hidden file input element
-    const hiddenFileInput = React.useRef(null);
-  };  
-    // Programatically click the hidden file input element
-    // when the Button component is clicked
-  const handleClick = event => {
-      hiddenFileInput.current.click();
-  };
-    // Call a function (passed as a prop from the parent component)
-    // to handle the user-selected file 
-  const handleChange = event => {
-      const fileUploaded = event.target.files[0];
-      props.handleFile(fileUploaded);
-  };
  
   useEffect(() => {
     const timeout = setInterval(() => {
@@ -278,21 +249,32 @@ function App() {
 
         <h3>Browser based apps are a great way to find out how well your model works in the real world!</h3>
       </div>
-      <>
-      <Button onClick={handleClick}>
-        Upload a file
-      </Button>
-      <input
-        type="file"
-        ref={hiddenFileInput}
-        onChange={handleChange}
-        style={{display: 'none'}} 
-      />
-    </>
       </div>
       </div>
     
   );
 }
 
-export default App;
+export default function App() {
+  const fileRef = useRef();
+
+  const handleChange = (e) => {
+    const [file] = e.target.files;
+    console.log(file);
+  };
+
+  return (
+    <div>
+      <button onClick={() => fileRef.current.click()}>
+        Custom File Input Button
+      </button>
+      <input
+        ref={fileRef}
+        onChange={handleChange}
+        multiple={false}
+        type="file"
+        hidden
+      />
+    </div>
+  );
+}
