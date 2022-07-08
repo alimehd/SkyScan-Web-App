@@ -271,7 +271,7 @@ function App() {
         type="file"
         ref={hiddenFileInput}
         onChange={handleChange}
-        style={{display: 'none'}} {/* Make the file input element invisible */}
+        style={{display: 'none'}} 
       />
     </>
       </div>
