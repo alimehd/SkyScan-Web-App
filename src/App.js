@@ -2,48 +2,38 @@
 import React, { useState, useRef, useEffect, useReducer } from "react";
 import * as tf from '@tensorflow/tfjs';
 import {loadGraphModel} from '@tensorflow/tfjs-converter';
-import Button from '@material-ui/core/Button';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import IconButton from '@material-ui/core/IconButton';
+import styled from 'styled-components';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import "./App.css";
 
-const App = () => {
- 
-  return (
-    <div style={{
-      display: 'flex',
-      margin: 'auto',
-      width: 400,
-      flexWrap: 'wrap',
-    }}>
-      <div style={{ width: '100%', float: 'left' }}>
-        <h3>How to use create button to choose file in ReactJS?</h3> <br />
-      </div>
-      <input
-        type="file"
-        accept="image/*"
-        style={{ display: 'none' }}
-        id="contained-button-file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" color="primary" component="span">
-          Upload
-        </Button>
-      </label>
-      <h3>  OR  </h3>
-      <input accept="image/*" id="icon-button-file"
-        type="file" style={{ display: 'none' }} />
-      <label htmlFor="icon-button-file">
-        <IconButton color="primary" aria-label="upload picture"
-        component="span">
-          <PhotoCamera />
-        </IconButton>
-      </label>
-    </div>
-  );
-}
+// Create a reference to the hidden file input element
+const hiddenFileInput = React.useRef(null);
+  
+// Programatically click the hidden file input element
+// when the Button component is clicked
+const handleClick = event => {
+  hiddenFileInput.current.click();
+};
+// Call a function (passed as a prop from the parent component)
+// to handle the user-selected file 
+const handleChange = event => {
+  const fileUploaded = event.target.files[0];
+  props.handleFile(fileUploaded);
+};
+return (
+  <>
+    <Button onClick={handleClick}>
+      Upload a file
+    </Button>
+    <input
+      type="file"
+      ref={hiddenFileInput}
+      onChange={handleChange}
+      style={{display: 'none'}} {/* Make the file input element invisible */}
+    />
+  </>
+);
 
 const machine = {
   initial: "initial",
