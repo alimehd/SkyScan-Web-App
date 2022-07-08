@@ -213,6 +213,13 @@ function App() {
     loadModel();
   }, [modelURL]); // Only re-run the effect if count changes
 
+  const fileRef = useRef();
+
+  const handleChange = (e) => {
+    const [file] = e.target.files;
+    console.log(file);
+  },
+
 
   
   
@@ -249,22 +256,7 @@ function App() {
 
         <h3>Browser based apps are a great way to find out how well your model works in the real world!</h3>
       </div>
-      </div>
-      </div>
-    
-  );
-}
-
-export default function App() {
-  const fileRef = useRef();
-
-  const handleChange = (e) => {
-    const [file] = e.target.files;
-    console.log(file);
-  };
-
-  return (
-    <div>
+      <div>
       <button onClick={() => fileRef.current.click()}>
         Custom File Input Button
       </button>
@@ -276,5 +268,10 @@ export default function App() {
         hidden
       />
     </div>
+      </div>
+      </div>
+    
   );
 }
+
+export default App;
