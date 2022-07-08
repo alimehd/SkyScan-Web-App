@@ -196,6 +196,21 @@ function App() {
     complete: { action: reset, text: "Reset" }
   };
 
+  const FileUploader = props => {
+    // Create a reference to the hidden file input element
+    const hiddenFileInput = React.useRef(null);
+  };  
+    // Programatically click the hidden file input element
+    // when the Button component is clicked
+  const handleClick = event => {
+      hiddenFileInput.current.click();
+  };
+    // Call a function (passed as a prop from the parent component)
+    // to handle the user-selected file 
+  const handleChange = event => {
+      const fileUploaded = event.target.files[0];
+      props.handleFile(fileUploaded);
+  };
  
   useEffect(() => {
     const timeout = setInterval(() => {
@@ -212,34 +227,7 @@ function App() {
     loadModel();
   }, [modelURL]); // Only re-run the effect if count changes
 
-  const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
 
-	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsSelected(true);
-	};
-
-	const handleSubmission = () => {
-		const formData = new FormData();
-
-		formData.append('File', selectedFile);
-
-		fetch(
-			'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
-			{
-				method: 'POST',
-				body: formData,
-			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
-	};
   
   
   return (
@@ -275,25 +263,17 @@ function App() {
 
         <h3>Browser based apps are a great way to find out how well your model works in the real world!</h3>
       </div>
-      <div>
-			<input type="file" name="file" onChange={changeHandler} />
-			{isSelected ? (
-				<div>
-					<p>Filename: {selectedFile.name}</p>
-					<p>Filetype: {selectedFile.type}</p>
-					<p>Size in bytes: {selectedFile.size}</p>
-					<p>
-						lastModifiedDate:{' '}
-						{selectedFile.lastModifiedDate.toLocaleDateString()}
-					</p>
-				</div>
-			) : (
-				<p>Select a file to show details</p>
-			)}
-			<div>
-				<button onClick={handleSubmission}>Submit</button>
-			</div>
-		</div>
+      <>
+      <Button onClick={handleClick}>
+        Upload a file
+      </Button>
+      <input
+        type="file"
+        ref={hiddenFileInput}
+        onChange={handleChange}
+        style={{display: 'none'}} {/* Make the file input element invisible */}
+      />
+    </>
       </div>
       </div>
     
