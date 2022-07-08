@@ -6,16 +6,15 @@ import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import "./App.css";
 
-function FileUploadPage(){
-	const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+const [selectedFile, setSelectedFile] = useState();
+const [isFilePicked, setIsFilePicked] = useState(false);
 
-	const changeHandler = (event) => {
+const changeHandler = (event) => {
 		setSelectedFile(event.target.files[0]);
 		setIsSelected(true);
 	};
 
-	const handleSubmission = () => {
+const handleSubmission = () => {
 		const formData = new FormData();
 
 		formData.append('File', selectedFile);
@@ -34,7 +33,6 @@ function FileUploadPage(){
 			.catch((error) => {
 				console.error('Error:', error);
 			});
-	};
 	};
 
 const machine = {
