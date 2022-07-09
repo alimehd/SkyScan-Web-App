@@ -169,7 +169,12 @@ function App() {
 
   const detect = async () => {
     const img = await webcam.capture();
-    let tensor = img.resize([1,640,640,3]).toInt(); // change the image size
+    const alignCorners = false;
+    let tensor = img.resizeBilinear(
+      crop,
+      [640,640],
+      alignCorners
+    );
 
 
 
