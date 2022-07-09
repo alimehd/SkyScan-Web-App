@@ -24,7 +24,7 @@ let classList = {
       id: 1,
   }
 }
-const threshold = 0.05;
+const threshold = 0.5;
 
 
 function App() {
@@ -169,7 +169,7 @@ function App() {
 
   const detect = async () => {
     const img = await webcam.capture();
-    let tensor = img.reshape([1,960,960,3]).toInt(); // change the image size
+    let tensor = img.resize([1,640,640,3]).toInt(); // change the image size
 
 
 
