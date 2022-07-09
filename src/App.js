@@ -169,7 +169,7 @@ function App() {
 
   const detect = async () => {
     const img = await webcam.capture();
-    let tensor = img.reshape([1,640,640,3]).toInt(); // change the image size
+    let tensor = img.reshape([1,960,960,3]).toInt(); // change the image size
 
 
 
